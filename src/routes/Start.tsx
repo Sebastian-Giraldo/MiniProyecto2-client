@@ -18,6 +18,16 @@ const App: React.FC = () => {
         inputMessageRef.current!.value = "";
       }
     };
+
+    const toggleMic = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        setIsAudioEnabled(!isAudioEnabled);
+      };
+    
+      const toggleCamera = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        setIsVideoEnabled(!isVideoEnabled); 
+      };
   
     useEffect(() => {
       socketServer.on("new-message", (newMessage: string) => {
