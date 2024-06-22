@@ -2,14 +2,19 @@ import { LockOutlined, UserOutlined, GoogleOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import appFirebase from '../firebaseConfig';
+import appFirebase from '../firebase/firebaseConfig';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useSelector, useDispatch } from "react-redux";
+import { changeEmail } from "../redux/userSlice";
 
 export const Login = () => {
     const navigate = useNavigate();
     const auth = getAuth(appFirebase)
     const [form] = Form.useForm(); 
     const [registered, setRegistered] = useState(false)
+    const email = useSelector((state) => state.user.email);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
 
     const onFinish = async ({ username, password }: User) => {
         if(registered) {
@@ -58,6 +63,8 @@ export const Login = () => {
                     <Input
                         prefix={<UserOutlined 
                         className="site-form-item-icon" />} 
+                        value="email"
+                        onChange={(event) => dispatch(changeEmail(event.target.value))}
                         placeholder="Username" />
                 </Form.Item>
                 <Form.Item

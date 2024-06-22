@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom";
-import appFirebase from '../firebaseConfig';
+import appFirebase from '../firebase/firebaseConfig';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 export const Menu = () => {
